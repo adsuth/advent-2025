@@ -6,7 +6,7 @@ public abstract class Day
 
     public int Number => Utils.GrabInt(ClassName);
 
-    public int Part { get; set; } = 1;
+    public int Part { get; set; }
 
     public string? Output
     {
@@ -29,27 +29,20 @@ public abstract class Day
         return File.ReadAllLines(path).ToList();
     }
 
-
-    public virtual void Part1()
-    {
-        Console.WriteLine($"Running Part 1");
-    }
-    public virtual void Part2()
-    {
-        Console.WriteLine($"Running Part 2");
-
-    }
+    public abstract void Part1();
+    public abstract void Part2();
 
     public Action Method => Part switch
     {
         1 => Part1,
         2 => Part2,
-        _ => Part1,
+        _ => throw new ArgumentException("⚠️ You must set a Part!"),
     };
 
-    public virtual void Run()
+    public void Run()
     {
         Console.WriteLine($"Running Day {Number}");
+        Console.WriteLine($"Running Part {Part}");
         Method.Invoke();
     }
 }
