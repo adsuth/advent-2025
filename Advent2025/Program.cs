@@ -6,6 +6,7 @@ namespace AoC2025;
 class Program
 {
     public static int DayNumber => 1;
+    public static int PartNumber => 1;
 
     public static Day Day => DayNumber switch
     {
@@ -15,6 +16,7 @@ class Program
 
     static void Main()
     {
+        Day.Part = PartNumber;
         Day.Run();
     }
 }

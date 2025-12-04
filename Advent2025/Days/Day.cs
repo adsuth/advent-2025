@@ -3,7 +3,10 @@ using System.Text.RegularExpressions;
 public abstract class Day
 {
     public string ClassName => GetType().Name;
+
     public int Number => Utils.GrabInt(ClassName);
+
+    public int Part { get; set; } = 1;
 
     public string? Output
     {
@@ -26,8 +29,27 @@ public abstract class Day
         return File.ReadAllLines(path).ToList();
     }
 
+
+    public virtual void Part1()
+    {
+        Console.WriteLine($"Running Part 1");
+    }
+    public virtual void Part2()
+    {
+        Console.WriteLine($"Running Part 2");
+
+    }
+
+    public Action Method => Part switch
+    {
+        1 => Part1,
+        2 => Part2,
+        _ => Part1,
+    };
+
     public virtual void Run()
     {
         Console.WriteLine($"Running Day {Number}");
+        Method.Invoke();
     }
 }
